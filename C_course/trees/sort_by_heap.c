@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include<assert.h>
 struct heap
 {
     int size;
