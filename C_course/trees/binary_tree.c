@@ -57,6 +57,18 @@ void prevorder(BT *root) // 按照前序访问二叉树
     prevorder(root->right);
 }
 
+void treesize(BT *root)
+{
+    size = 0; // 当使用static变量，int*数据存储在静态区，不会受栈帧的创建和销毁影响
+    if (root == NULL)
+    {
+        return;
+    }
+    size++;
+    treesize(root->left);
+    treesize(root->right);
+}
+
 int main()
 {
     BT *root = createtree();
