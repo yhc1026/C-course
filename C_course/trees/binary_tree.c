@@ -57,21 +57,82 @@ void prevorder(BT *root) // 按照前序访问二叉树
     prevorder(root->right);
 }
 
-void treesize(BT *root)
+// int size = 0; // 求节点个数1：使用全局变量为最佳
+//
+//  void treesize1(BT* root)
+//{
+//     if (root == NULL)
+//     {
+//         return;
+//     }
+//     size++;
+//     treesize(root->left);
+//     treesize(root->right);
+// }
+
+int treesize2(BT *root) // 求节点个数2：采用分治思维，逐层上报
 {
-    size = 0; // 当使用static变量，int*数据存储在静态区，不会受栈帧的创建和销毁影响
     if (root == NULL)
     {
         return;
     }
-    size++;
-    treesize(root->left);
-    treesize(root->right);
+    else
+    {
+        return treesize2(root->left) + treesize2(root->right) + 1; //+1的意思是加上root自己
+    }
+}
+
+int leafsize(BT *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    if (root->left == 0 && root->right == 0)
+    {
+        return 1;
+    }
+    return leafsize(root->left) + leafsize(root->right);
+}
+
+int height(BT *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    int left = height(root->left);
+
+    int right = height(root->right);
+    if (left >= right)
+    {
+        return left + 1;
+    }
+    else
+    {
+        return right + 1;
+    }
+}
+
+int treelevel(BT *root, int k)
+{
+    assert(k > 0);
+    if (root == NULL)
+    {
+        return 0;
+    }
+    if (k == 1 && root != NULL)
+    {
+        return 1;
+    }
+    return treelevel(root->left, k - 1) + treelever(root->right, k - 1);
 }
 
 int main()
 {
     BT *root = createtree();
-    prevorder(root);
+    // prevorder(root);
+    //  treesize1(root);
+    printf("%d", leafsize(root));
     return 0;
 }
