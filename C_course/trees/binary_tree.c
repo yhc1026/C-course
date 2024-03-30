@@ -3,6 +3,7 @@
 // 中序：左子树-根-右子树
 // 后续：左子树-右子树-根
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -34,7 +35,7 @@ BT *createtree()
     BT *node3 = buynode(3);
     BT *node4 = buynode(4);
     BT *node5 = buynode(5);
-    BT *node6 = buynode(6);
+    BT *node6 = buynode(0);
 
     node1->left = node2; // 构建树
     node1->right = node4;
@@ -125,14 +126,53 @@ int treelevel(BT *root, int k)
     {
         return 1;
     }
-    return treelevel(root->left, k - 1) + treelever(root->right, k - 1);
+    return treelevel(root->left, k - 1) + treelevel(root->right, k - 1);
+}
+
+// 二叉树查找值为x的节点
+BT *findnode(BT *root, int n)
+{
+    BT *resultL = root; // 左节点指针存储
+    BT *resultR = root; // 右节点指针存储
+    if (root == NULL)   // 判空
+    {
+        return NULL;
+    }
+    if ((root->data) != n) // 前序判断根节点
+    {
+        if (resultL == NULL && resultR == NULL) // 是否为树的最低层，或者这层之下都被判断过且没有目标节点
+        {
+            return NULL;
+        }
+        resultL = findnode(root->left, n); // 递归
+        resultR = findnode(root->right, n);
+    }
+    if (resultL != NULL) // 返回左右节点中不为空的，也就是返回目标节点的地址
+    {
+        return resultL;
+    }
+    else
+    {
+        return resultR;
+    }
 }
 
 int main()
 {
     BT *root = createtree();
+
+    BT *p = findnode(root, 8);
+    if (p == NULL)
+    {
+        printf("查无此数 /search failed");
+    }
+    else
+    {
+        printf("%d", p->data);
+    }
+
     // prevorder(root);
     //  treesize1(root);
-    printf("%d", leafsize(root));
+    // printf("%d", leafsize(root));
     return 0;
 }
