@@ -77,7 +77,7 @@ int treesize2(BT *root) // 求节点个数2：采用分治思维，逐层上报
     {
         return;
     }
-    else
+    else 
     {
         return treesize2(root->left) + treesize2(root->right) + 1; //+1的意思是加上root自己
     }
