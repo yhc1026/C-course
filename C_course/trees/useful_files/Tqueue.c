@@ -1,6 +1,8 @@
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-typedef int Qtype;
+typedef BT *Qtype;
 
 typedef struct Queuenode
 {
@@ -13,7 +15,7 @@ typedef struct Queue
     Qnode *head;
     Qnode *tail;
     int size;
-};
+} Queue;
 
 void createnode(Queue *Q, Qtype x)
 {
@@ -24,6 +26,7 @@ void createnode(Queue *Q, Qtype x)
 
 void destroy(Queue *Q)
 {
+    Qnode *Qhead = NULL;
     while (Q->head != NULL)
     {
         Qhead = Q->head;
@@ -57,7 +60,7 @@ void Qpull(Queue *Q)
     {
         return;
     }
-    Qnode cur = Q->head->next;
+    Qnode *cur = Q->head->next;
     free(Q->head);
     Q->head = cur;
     (Q->size)--;
@@ -65,6 +68,7 @@ void Qpull(Queue *Q)
 
 Qtype getfront(Queue *Q)
 {
+
     Qtype x = Q->head->data;
     Qpull(Q);
     return x;
@@ -72,11 +76,9 @@ Qtype getfront(Queue *Q)
 
 bool isempty(Queue *Q)
 {
-}
-
-int main
-{
-    Queue q;
-    Qtype x = 0;
-    createnode(&q, x);
+    if (Q->head == Q->tail && Q->head == NULL)
+    {
+        return true;
+    }
+    return false;
 }
