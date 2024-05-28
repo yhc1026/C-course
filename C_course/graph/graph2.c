@@ -41,7 +41,7 @@ void createGadjlist(Gadjlist *G)
         e->next = G->Alist[i].firstedge; // 为头插法，如果这是第一轮操作，见第31行，firstedge为空，那么此处无意义；若不是第一轮操作，firstedge另有其人，则将e头插到原firstedge前面，结合下一行操作，成为新的firstedge
         G->Alist[i].firstedge = e;       // e所代表的边指针成为新的firstedge
 
-        e = (Enode *)malloc(sizeof(Enode)); // 以下四行代码为边的双向化操作，与39-42本质相同。对象为j节点，同样的道理把新e边节点作为j的firstedge，使得两点间形成双向边
+        e = (Enode *)malloc(sizeof(Enode)); // 以下四行代码为边的双向化操作，与39-42本质相同。 对象为j节点，同样的道理把新e边节点作为j的firstedge，使得两点间形成双向边
         e->adjvex = i;
         e->next = G->Alist[j].firstedge;
         G->Alist[j].firstedge = e;
