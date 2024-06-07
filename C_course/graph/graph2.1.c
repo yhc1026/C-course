@@ -8,7 +8,7 @@ typedef struct edgenode
     struct edgenode *next;
 } Enode;
 
-tupedef struct vertexnode
+typedef struct vertexnode
 {
     char info;
     Enode *firstedge;
