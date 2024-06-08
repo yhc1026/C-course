@@ -15,3 +15,19 @@ void DFS(Mgraph G, int i)
     }
     return;
 }
+
+void DFStraverse(Mgraph G)
+{
+    int j = 0;
+    for (j = 0; j < G->numnodes; j++)
+    {
+        visited[j] = 0;
+    }
+    for (j = 0; j < G->numnodes; j++)
+    {
+        if (!visited[j])
+        {
+            DFS(G, j);
+        }
+    }
+}
