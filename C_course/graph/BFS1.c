@@ -3,6 +3,7 @@
 #include "D:\codeC\vscodeC\C_course\C-course\C_course\graph\graph1.c"
 #include "D:\codeC\vscodeC\C_course\C-course\C_course\stack&queue\queue.c"
 
+#include <stdbool.h>
 bool visited[MAXVEX]; // 判断是否访问过的数组
 
 void BFS1(Mgraph G)
